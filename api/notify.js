@@ -1,4 +1,4 @@
-import { addStat } from "./stats";
+import { addStat } from "./stats.js";
 
 export default async function handler(req, res) {
   if (req.method !== "POST") {
@@ -7,6 +7,7 @@ export default async function handler(req, res) {
 
   const { domain, type, link } = req.body;
 
+  // tambah statistik
   addStat(type);
 
   const text = `
