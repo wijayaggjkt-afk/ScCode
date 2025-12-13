@@ -10,22 +10,24 @@ export default async function handler(req, res) {
   if (text === "/stats") {
     const s = getStats();
 
-    const reply = `
-📊 STATISTIK DOWNLOADER
+    const reply =
+`📊 STATISTIK DOWNLOADER
 
 📥 Total : ${s.total}
 📸 Instagram : ${s.ig}
-🎵 TikTok : ${s.tt}
-`;
+🎵 TikTok : ${s.tt}`;
 
-    await fetch(`https://api.telegram.org/bot${process.env.BOT_TOKEN}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        chat_id: chatId,
-        text: reply
-      })
-    });
+    await fetch(
+      `https://api.telegram.org/bot8513113980:AAHDEHF8L5_3bOEgoC8sODxMEZlb529ayXA/sendMessage`,
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          chat_id: 7202245315,
+          text: reply
+        })
+      }
+    );
   }
 
   res.json({ ok: true });
