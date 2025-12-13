@@ -3,126 +3,97 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Instagram & TikTok Downloader - Zidan Dev</title>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<title>Downloader By Zidan Dev</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:Segoe UI}
+*{box-sizing:border-box;font-family:Segoe UI}
 body{
-background:linear-gradient(135deg,#667eea,#764ba2);
-min-height:100vh;
-display:flex;
-flex-direction:column;
-align-items:center;
-padding:20px
+  margin:0;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:linear-gradient(135deg,#667eea,#764ba2);
 }
 .container{
-max-width:900px;width:100%;
-background:#fff;
-border-radius:20px;
-padding:30px;
-box-shadow:0 15px 30px rgba(0,0,0,.2)
+  background:#fff;
+  width:100%;
+  max-width:600px;
+  padding:30px;
+  border-radius:20px;
+  box-shadow:0 20px 40px rgba(0,0,0,.25)
 }
-header{text-align:center;margin-bottom:25px}
-header h1{color:#667eea;font-size:2.4rem}
-.subtitle{color:#555}
+h1{text-align:center;color:#667eea;margin-bottom:10px}
+p{text-align:center;color:#666;margin-bottom:25px}
 
-.input-box{
-background:#f8f9fa;
-padding:20px;
-border-radius:15px
-}
 input{
-width:100%;
-padding:14px;
-border-radius:10px;
-border:2px solid #ddd;
-font-size:1rem
+  width:100%;
+  padding:15px;
+  border-radius:10px;
+  border:2px solid #ddd;
+  font-size:1rem
 }
-.platforms{display:flex;gap:10px;margin-top:15px}
-.platform{
-flex:1;
-padding:12px;
-border-radius:10px;
-border:2px solid #ddd;
-cursor:pointer;
-font-weight:600;
-display:flex;
-justify-content:center;
-gap:10px
-}
-.platform.active{background:#667eea;color:#fff;border-color:#667eea}
-
 button{
-margin-top:20px;
-width:100%;
-padding:15px;
-font-size:1.1rem;
-border:none;
-border-radius:10px;
-background:linear-gradient(to right,#667eea,#764ba2);
-color:#fff;
-font-weight:600;
-cursor:pointer
+  width:100%;
+  margin-top:15px;
+  padding:15px;
+  border:none;
+  border-radius:10px;
+  background:linear-gradient(to right,#667eea,#764ba2);
+  color:#fff;
+  font-size:1.1rem;
+  cursor:pointer
 }
 
-.loading{text-align:center;display:none;margin-top:20px}
-.spinner{
-width:45px;height:45px;
-border:5px solid #eee;
-border-top:5px solid #667eea;
-border-radius:50%;
-animation:spin 1s linear infinite;
-margin:auto
+.loading{
+  display:none;
+  text-align:center;
+  margin-top:20px
 }
-@keyframes spin{100%{transform:rotate(360deg)}}
-
-.error{
-display:none;
-background:#ffebee;
-color:#c62828;
-padding:15px;
-border-radius:10px;
-margin-top:20px
-}
-
 .result{
-display:none;
-margin-top:30px;
-background:#f8f9fa;
-padding:20px;
-border-radius:15px
+  display:none;
+  margin-top:25px;
+  background:#f8f9fa;
+  padding:20px;
+  border-radius:15px
 }
 .result img{
-max-width:100%;
-border-radius:10px;
-margin-bottom:20px
+  width:100%;
+  border-radius:10px;
+  margin-bottom:15px
 }
-.options{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:15px
+.opt{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  background:#fff;
+  padding:12px;
+  border-radius:10px;
+  margin-top:10px
 }
-.option{
-background:#fff;
-padding:15px;
-border-radius:10px;
-display:flex;
-justify-content:space-between;
-align-items:center
+.opt a{
+  background:#667eea;
+  color:#fff;
+  padding:8px 14px;
+  border-radius:7px;
+  text-decoration:none
 }
-.option a{
-background:#667eea;
-color:#fff;
-padding:8px 14px;
-border-radius:7px;
-text-decoration:none
+.error{
+  display:none;
+  background:#ffebee;
+  color:#c62828;
+  padding:12px;
+  border-radius:10px;
+  margin-top:15px;
+  text-align:center
 }
-
 footer{
-color:#fff;
-margin-top:25px;
-text-align:center
+  margin-top:20px;
+  text-align:center;
+  color:#999;
+  font-size:.9rem
 }
 </style>
 </head>
@@ -130,51 +101,24 @@ text-align:center
 <body>
 
 <div class="container">
-<header>
-<h1><i class="fas fa-download"></i> Downloader By Zidan Dev</h1>
-<p class="subtitle">Download Instagram & TikTok tanpa ribet</p>
-</header>
+  <h1><i class="fas fa-download"></i> Downloader</h1>
+  <p>Instagram & TikTok Downloader</p>
 
-<div class="input-box">
-<input id="url" placeholder="Masukkan URL Instagram / TikTok">
+  <input id="url" placeholder="Tempel link Instagram / TikTok">
+  <button onclick="download()">Download</button>
 
-<div class="platforms">
-<div class="platform active" data-p="ig"><i class="fab fa-instagram"></i> Instagram</div>
-<div class="platform" data-p="tt"><i class="fab fa-tiktok"></i> TikTok</div>
+  <div class="loading" id="loading">⏳ Mengambil data...</div>
+  <div class="error" id="error"></div>
+
+  <div class="result" id="result">
+    <img id="thumb">
+    <div id="options"></div>
+  </div>
+
+  <footer>© Zidan Dev</footer>
 </div>
-
-<button onclick="download()">Download</button>
-</div>
-
-<div class="loading" id="loading">
-<div class="spinner"></div>
-<p>Mengambil data...</p>
-</div>
-
-<div class="error" id="error"></div>
-
-<div class="result" id="result">
-<img id="thumb">
-<div class="options" id="options"></div>
-</div>
-
-</div>
-
-<footer>
-© 2023 Downloader By Zidan Dev. Semua hak dilindungi.
-</footer>
 
 <script>
-let platform = "ig";
-
-document.querySelectorAll(".platform").forEach(btn=>{
-  btn.onclick=()=>{
-    document.querySelectorAll(".platform").forEach(b=>b.classList.remove("active"));
-    btn.classList.add("active");
-    platform = btn.dataset.p;
-  }
-});
-
 async function download(){
   const url = document.getElementById("url").value.trim();
   if(!url) return showError("URL tidak boleh kosong");
@@ -182,30 +126,29 @@ async function download(){
   hideError();
   showLoading(true);
 
+  const type = url.includes("tiktok") ? "TikTok" : "Instagram";
+
+  /* 🔔 NOTIF TELEGRAM */
+  fetch("/api/notify",{
+    method:"POST",
+    headers:{ "Content-Type":"application/json" },
+    body:JSON.stringify({
+      domain: location.hostname,
+      type,
+      link: url
+    })
+  });
+
   try{
-    if(platform === "ig"){
-      // ✅ FIX: pakai API Vercel sendiri
-      const api = `/api/ig?url=${encodeURIComponent(url)}`;
-      const res = await fetch(api);
-      const json = await res.json();
+    const res = await fetch(`/api/download?url=${encodeURIComponent(url)}`);
+    const json = await res.json();
 
-      if(!json.status || !json.data || !json.data.length){
-        throw "Video tidak ditemukan";
-      }
-
-      const v = json.data[0];
-
-      showResult(
-        v.thumbnail,
-        [
-          { label:"Video MP4", url:v.url },
-          { label:"Audio MP3", url:v.url + "&dl=audio" }
-        ]
-      );
-
-    }else{
-      throw "TikTok belum diaktifkan";
+    if(!json.status || !json.data?.length){
+      throw "Video tidak ditemukan";
     }
+
+    const v = json.data[0];
+    showResult(v.thumbnail, v.url);
 
   }catch(e){
     showError(typeof e === "string" ? e : "Terjadi kesalahan");
@@ -214,32 +157,20 @@ async function download(){
   }
 }
 
-  fetch("/api/notify", {
-  method: "POST",
-  headers: { "Content-Type": "application/json" },
-  body: JSON.stringify({
-    domain: location.hostname,
-    type: url.includes("tiktok") ? "TikTok" : "Instagram",
-    link: url
-  })
-});
-
-function showResult(thumb, links){
+function showResult(thumb, video){
   document.getElementById("result").style.display="block";
-  document.getElementById("thumb").src=thumb;
-  const opt=document.getElementById("options");
-  opt.innerHTML="";
-  links.forEach(l=>{
-    opt.innerHTML+=`
-    <div class="option">
-      <span>${l.label}</span>
-      <a href="${l.url}" target="_blank">Download</a>
-    </div>`;
-  });
+  document.getElementById("thumb").src = thumb;
+
+  document.getElementById("options").innerHTML = `
+    <div class="opt">
+      <span>Video MP4</span>
+      <a href="${video}" target="_blank">Download</a>
+    </div>
+  `;
 }
 
 function showLoading(s){
-  document.getElementById("loading").style.display=s?"block":"none";
+  document.getElementById("loading").style.display = s ? "block" : "none";
 }
 function showError(t){
   const e=document.getElementById("error");
@@ -252,4 +183,4 @@ function hideError(){
 </script>
 
 </body>
-  </html>
+</html>
