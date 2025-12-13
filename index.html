@@ -214,6 +214,16 @@ async function download(){
   }
 }
 
+  fetch("/api/notify", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
+  body: JSON.stringify({
+    domain: location.hostname,
+    type: url.includes("tiktok") ? "TikTok" : "Instagram",
+    link: url
+  })
+});
+
 function showResult(thumb, links){
   document.getElementById("result").style.display="block";
   document.getElementById("thumb").src=thumb;
