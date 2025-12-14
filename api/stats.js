@@ -4,12 +4,12 @@ let stats = {
   tt: 0
 };
 
-export function addStat(type) {
+export function addStat(type){
   stats.total++;
-  if (type === "Instagram") stats.ig++;
-  if (type === "TikTok") stats.tt++;
+  if(type === "Instagram") stats.ig++;
+  if(type === "TikTok") stats.tt++;
 }
 
-export function getStats() {
+export function getStats(){
   return stats;
 }
