@@ -46,60 +46,17 @@ button{
   font-size:1.1rem;
   cursor:pointer
 }
-
-.loading{
-  display:none;
-  text-align:center;
-  margin-top:20px
-}
-.result{
-  display:none;
-  margin-top:25px;
-  background:#f8f9fa;
-  padding:20px;
-  border-radius:15px
-}
-.result img{
-  width:100%;
-  border-radius:10px;
-  margin-bottom:15px
-}
-.opt{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  background:#fff;
-  padding:12px;
-  border-radius:10px;
-  margin-top:10px
-}
-.opt a{
-  background:#667eea;
-  color:#fff;
-  padding:8px 14px;
-  border-radius:7px;
-  text-decoration:none
-}
-.error{
-  display:none;
-  background:#ffebee;
-  color:#c62828;
-  padding:12px;
-  border-radius:10px;
-  margin-top:15px;
-  text-align:center
-}
-footer{
-  margin-top:20px;
-  text-align:center;
-  color:#999;
-  font-size:.9rem
-}
+.loading{display:none;text-align:center;margin-top:20px}
+.result{display:none;margin-top:25px;background:#f8f9fa;padding:20px;border-radius:15px}
+.result img{width:100%;border-radius:10px;margin-bottom:15px}
+.opt{display:flex;justify-content:space-between;align-items:center;background:#fff;padding:12px;border-radius:10px;margin-top:10px}
+.opt a{background:#667eea;color:#fff;padding:8px 14px;border-radius:7px;text-decoration:none}
+.error{display:none;background:#ffebee;color:#c62828;padding:12px;border-radius:10px;margin-top:15px;text-align:center}
+footer{text-align:center;color:#999;margin-top:20px}
 </style>
 </head>
 
 <body>
-
 <div class="container">
   <h1><i class="fas fa-download"></i> Downloader</h1>
   <p>Instagram & TikTok Downloader</p>
@@ -128,7 +85,7 @@ async function download(){
 
   const type = url.includes("tiktok") ? "TikTok" : "Instagram";
 
-  /* 🔔 NOTIF TELEGRAM */
+  // NOTIF TELEGRAM
   fetch("/api/notify",{
     method:"POST",
     headers:{ "Content-Type":"application/json" },
@@ -137,10 +94,10 @@ async function download(){
       type,
       link: url
     })
-  });
+  }).catch(()=>{});
 
   try{
-    const res = await fetch(`/api/download?url=${encodeURIComponent(url)}`);
+    const res = await fetch(`/api/ig?url=${encodeURIComponent(url)}`);
     const json = await res.json();
 
     if(!json.status || !json.data?.length){
@@ -160,7 +117,6 @@ async function download(){
 function showResult(thumb, video){
   document.getElementById("result").style.display="block";
   document.getElementById("thumb").src = thumb;
-
   document.getElementById("options").innerHTML = `
     <div class="opt">
       <span>Video MP4</span>
@@ -169,18 +125,9 @@ function showResult(thumb, video){
   `;
 }
 
-function showLoading(s){
-  document.getElementById("loading").style.display = s ? "block" : "none";
-}
-function showError(t){
-  const e=document.getElementById("error");
-  e.style.display="block";
-  e.innerText=t;
-}
-function hideError(){
-  document.getElementById("error").style.display="none";
-}
+function showLoading(s){document.getElementById("loading").style.display=s?"block":"none"}
+function showError(t){const e=document.getElementById("error");e.style.display="block";e.innerText=t}
+function hideError(){document.getElementById("error").style.display="none"}
 </script>
-
 </body>
 </html>
