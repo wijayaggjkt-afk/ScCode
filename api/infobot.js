@@ -1,0 +1,2 @@
+export const BOT_TOKEN = 8513113980:AAHDEHF8L5_3bOEgoC8sODxMEZlb529ayXA;
+export const CHAT_ID = 7202245315;
